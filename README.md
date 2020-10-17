@@ -1,4 +1,4 @@
-![](capture.jpg)
+![](capture.png)
 
 # whatsapp-clone
 
