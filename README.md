@@ -1,3 +1,5 @@
+![](capture.jpg)
+
 # whatsapp-clone
 
 ## Project setup
