@@ -1,11 +1,9 @@
 <template>
-
     <div id="app" class="w-full wa-body">
 
         <!-- HEADER -->
-
         <div class="header flex justify-between">
-            <p class="font-semibold p-4 chat-color text-xl text-white">WhatsApp</p>
+            <p class="font-semibold p-4 text-xl text-white">WhatsApp</p>
             <div class="flex place-items-center text-white mr-4">
                 <i class="p-2 fas fa-search"></i>
                 <i class="p-2 far fa-comment-dots"></i>
@@ -13,62 +11,36 @@
             </div>
         </div>
 
-        <div class="header flex items-center justify-around px-4 font-semibold text-white py-0">
-            <p class="opacity-50">CALLS</p>
-            <p class="border-b-4 px-8 p-2 chat-color">CHATS</p>
-            <p class="opacity-50">CONTACTS</p>
-        </div>
+        <!-- MENU -->
+        <ul class="header menu flex items-center justify-between font-semibold py-0">
+
+            <router-link to="/calls" active-class="active" title="calls"><li class="w-1/3 px-10 p-2 cursor-pointer">CALLS</li></router-link>
+
+            <router-link to="/chats" active-class="active" title="chats"><li class="w-1/3 px-8 p-2 cursor-pointer">CHATS</li></router-link>
+
+            <router-link to="contacts" active-class="active" title="contacts"><li class="w-1/3 cursor-pointer px-8 p-2">CONTACTS</li></router-link>
+
+        </ul>
 
         <!-- CONTACT BOX -->
+        <router-view></router-view>
 
-        <!-- v-for="user in users" v-bind:key="`${user.user}`" -->
-
-        <div v-for="rlt in result" v-bind:key="`${rlt.username}`" class="contact-box flex justify-between py-4 border">
-
-            <img class="ml-4 rounded-full" src="https://pbs.twimg.com/profile_images/1309223687086841856/m4D7wSLy_400x400.jpg" alt="" />
-            
-            <div class="flex-column w-1/3 mr-24">
-                <p class="font-bold">{{rlt.username}}</p>
-                <p class="text-gray-600">{{rlt.website}}</p>
-            </div>
-
-            <p class="green-time font-semibold px-2 mr-2">{{rlt.id}}</p>
-
-        </div>
-    
     </div>
-
 </template>
 
 <script>
-import axios from "axios";
+
+// import chats from './components/chats.vue';
+// import calls from './components/calls.vue';
 
 export default {
-
+    
     name: 'App',
 
-    // data(){
-    // return {
-    // users: [ 
-    //   {icon: 'https://pbs.twimg.com/profile_images/1311690208509747200/KngeU1O9_400x400.jpg', name: 'Dog', message: 'guau guau guau', time: '10:40 AM'},
-    //   {icon: 'https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a_400x400.jpeg', name: 'Cat', message: 'miau miau', time: '5:00 AM'},
-    //   {icon: 'https://pbs.twimg.com/profile_images/467502291415617536/SP8_ylk9_400x400.png', name: 'Duck', message: 'duck duck go', time: '8:17 AM'}
-    //     ],
-    //   }
-    // },
-
-      data () {
-      return {
-        result:[]
-      }
-  },
-
-    async created() {
-      let response = await axios.get("https://jsonplaceholder.typicode.com/users");
-      this.result = response.data;
-      console.log(response.data);
-    }
-
+    // components: {
+    //     chats,
+    //     calls
+    // }
 }
 
 </script>
@@ -85,17 +57,17 @@ export default {
     background: #075E54;
 }
 
-.wa-body .header .chat-color {
-    color: #edf6f6;
+.wa-body .menu li {
+    color: white;
 }
 
-.wa-body .contact-box .green-time {
-    color: #25D366;
+.wa-body .menu .active {
+    opacity: 1;
+    border-bottom: 4px solid white;
 }
 
-img {
-  width: 58px;
-  height: 58px;
+.wa-body .menu a:not(.active) {
+  opacity: 0.5;
 }
 
 </style>
