@@ -4,16 +4,16 @@
 
     <!-- CONTACT BOX -->
 
-    <div v-for="rlt in result" v-bind:key="`${rlt.id}`" class="contact-box flex justify-between py-4 border">
+    <div v-for="character of characters" v-bind:key="character.id" class="contact-box flex justify-between py-4 border">
 
-        <img class="ml-4 rounded-full" src="https://pbs.twimg.com/profile_images/1309223687086841856/m4D7wSLy_400x400.jpg" alt="" />
+        <img class="ml-4 rounded-full" :src="character.image" alt="" />
         
         <div class="flex-column w-1/3 mr-24">
-            <p class="font-bold">{{rlt.username}}</p>
-            <p class="text-gray-600">{{rlt.website}}</p>
+            <p class="font-bold">{{character.name}}</p>
+            <p class="text-gray-600">{{character.status}}</p>
         </div>
 
-        <p class="green-time font-semibold px-2 mr-2">{{rlt.id}}</p>
+        <p class="green-time font-semibold px-2 mr-2">{{character.id}}</p>
 
     </div>
 
@@ -23,35 +23,32 @@
 
 <script>
 
+/* eslint-disable no-unused-vars */
+
 import axios from "axios";
 
 export default {
 
     name: 'App',
 
-    // data(){
-    // return {
-    // users: [ 
-    //   {icon: 'https://pbs.twimg.com/profile_images/1311690208509747200/KngeU1O9_400x400.jpg', name: 'Dog', message: 'guau guau guau', time: '10:40 AM'},
-    //   {icon: 'https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a_400x400.jpeg', name: 'Cat', message: 'miau miau', time: '5:00 AM'},
-    //   {icon: 'https://pbs.twimg.com/profile_images/467502291415617536/SP8_ylk9_400x400.png', name: 'Duck', message: 'duck duck go', time: '8:17 AM'}
-    //     ],
-    //   }
-    // },
+    data: function(){
+      return{
+        characters: []
+      };
+    },
 
-      data () {
-      return {
-        result:[]
-            }
-        },
-
-    async created() {
-      let response = await axios.get("https://jsonplaceholder.typicode.com/users");
-      this.result = response.data;
-      console.log(response.data);
-    }
-
-}
+      mounted(){
+        let result = axios
+        .get("https://rickandmortyapi.com/api/character")
+        .then(res => {
+          this.characters = res.data.results;
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
+  };
 
 </script>
 

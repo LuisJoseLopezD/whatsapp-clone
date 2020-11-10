@@ -22,7 +22,7 @@
 
         </ul>
 
-        <!-- CONTACT BOX -->
+        <!-- CHANGE VIEW -->
         <router-view></router-view>
 
     </div>
